@@ -29,6 +29,18 @@ thermodynamics). Run it via `python run_primer2.py --demo` (self-contained, no
 NUPACK), or with `--sequences`/`--concentrations` CSVs and `--backend nupack`
 for real runs. Tests: `python -m pytest`.
 
+## primer2.critique (multi-agent algorithm critique)
+
+`primer2/critique/` is an adversarial review framework: a `CritiquePanel` runs
+several `CriticAgent`s (`primer2/critique/agents/`: thermodynamics, optimization,
+statistics, biology, software), each attacking the probe-design algorithm from a
+different angle and emitting structured `Finding`s. Many findings are backed by a
+*live* empirical probe of the real code (e.g. GC/AU energy equality, legacy
+roulette divide-by-zero, point-mutation no-op rate, fitness winner-flip under
+noise), so claims are evidence-based. Run `python run_critique.py`
+(`--format markdown --out report.md`); it exits non-zero when any CRITICAL
+finding exists so it can gate CI. Tests live in `tests/test_critique.py`.
+
 ## Cursor Cloud specific instructions
 
 Python dependencies are installed into a virtualenv at `~/.venvs/primer`
