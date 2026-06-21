@@ -16,13 +16,27 @@ concentrations).
 - `cpt_NUPACK.py` - solves hybridization concentrations (scipy Newton solver).
 - `crossover.py`, `pointmut.py`, `shiftmut.py`, `roulette.py` - GA operators.
 
+## primer2 (modernized version)
+
+`primer2/` is a rewrite of the legacy pipeline that (1) targets the NUPACK 4
+Python API, (2) computes hybridization yields from a multi-strand test-tube
+equilibrium with a robustly bracketed solver (`primer2/equilibrium.py`) instead
+of the legacy Newton solver, and (3) designs multi-probe panels and supports
+variable-length isomiR targets. Thermodynamics live behind
+`primer2.thermo.ThermoBackend`: `NupackBackend` (real NUPACK 4) and
+`HeuristicBackend` (NUPACK-free approximation for tests/CI; not calibrated
+thermodynamics). Run it via `python run_primer2.py --demo` (self-contained, no
+NUPACK), or with `--sequences`/`--concentrations` CSVs and `--backend nupack`
+for real runs. Tests: `python -m pytest`.
+
 ## Cursor Cloud specific instructions
 
 Python dependencies are installed into a virtualenv at `~/.venvs/primer`
 (created/refreshed by the startup update script). Run things with
-`~/.venvs/primer/bin/python`. The repo has no package config, so add the repo
-root to the path when importing its modules from elsewhere, e.g.
-`PYTHONPATH=/workspace ~/.venvs/primer/bin/python your_script.py`.
+`~/.venvs/primer/bin/python`. The legacy scripts have no package config, so add
+the repo root to the path when importing those modules from elsewhere, e.g.
+`PYTHONPATH=/workspace ~/.venvs/primer/bin/python your_script.py`. The `primer2`
+package and `run_primer2.py` import correctly when run from the repo root.
 
 All `.py` modules are now Python-3 syntax clean (`python -m py_compile *.py`
 passes for every file). There is no lint config; `py_compile` is the basic
