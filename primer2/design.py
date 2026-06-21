@@ -60,7 +60,8 @@ def design_probe(backend: ThermoBackend, targets: Sequence[str],
                  point_prob: float = 0.1, shift_prob: float = 0.7,
                  temp_k: float = 310.0, probe_conc: Optional[float] = None,
                  rng: Optional[np.random.Generator] = None,
-                 log: Optional[callable] = None) -> ProbeResult:
+                 log: Optional[callable] = None,
+                 on_generation: Optional[callable] = None) -> ProbeResult:
     target_conc = np.asarray(target_conc, dtype=float)
     rng = rng or np.random.default_rng()
     if probe_conc is None:
@@ -87,6 +88,8 @@ def design_probe(backend: ThermoBackend, targets: Sequence[str],
         history.append(best_fit)
         if log is not None:
             log(target_index, gen, best_fit, probe_conc)
+        if on_generation is not None:
+            on_generation(gen, population.copy(), fitness.copy())
 
         population = ga.next_generation(population, fitness, n_elite,
                                         point_prob, shift_prob, rng)
