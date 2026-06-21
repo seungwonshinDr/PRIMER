@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-import theprobes_NUPACK as pb
+import theprobes as pb
 
 
 np.random.seed(None)
@@ -23,17 +23,17 @@ interval = 10
 Repeats = 100
 Percentage = 0
 for i in range(Repeats):
-    print 'Repeats =',i,'in',Repeats
+    print('Repeats =', i, 'in', Repeats)
     dipss, percentage = pb.probes(Targets, nEpochs, procNum, TargetsConc, ProbeConc,
                   interval, Temp, popSize, nElite, pointmutProb, shiftmutProb, TargetCell)
 
     if percentage > Percentage:
         DIPSs = dipss
         Percentage = percentage
-        print '-------------------> New Champion!! Percentage = ', round(Percentage, 4), '% <-------------------'
+        print('-------------------> New Champion!! Percentage = ', round(Percentage, 4), '% <-------------------')
         np.savetxt('DIPSs_Target'+str(TargetCell)+'_Interval'+str(interval)+'_Repeats'+str(Repeats), DIPSs)
 
     else:
-        print '-------------------> Lose.. Percentage = ', round(percentage, 4), '% / Champion = ', round(Percentage,4),'% <-------------------'
+        print('-------------------> Lose.. Percentage = ', round(percentage, 4), '% / Champion = ', round(Percentage,4),'% <-------------------')
 
 
