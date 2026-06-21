@@ -1,0 +1,9 @@
+# Python dependencies for the pip-installable parts of PRIMER / DIPS.
+# The genetic-algorithm engine and thermodynamics modules (Keq, cpt_NUPACK,
+# crossover, pointmut, shiftmut, roulette) only need these.
+#
+# NOTE: Gibbs_*_NUPACK.py, theprobes.py and Run_DIPS.py additionally require the
+# proprietary `nupack` package (https://nupack.org), which is NOT on PyPI and
+# must be obtained/installed separately under its own license.
+numpy
+scipy
