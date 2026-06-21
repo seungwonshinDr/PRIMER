@@ -128,8 +128,8 @@ def probes(Targets, nEpochs, procNum, TargetsConc, ProbeConc, interval, Temp, po
         #print(Ghp_probe)
 
         if iter % interval == 0:
-            print 'Target =', str(TargetCell), '/ Iter =', iter
-            print "End Time =", time.time() - start_time, 'Fitness =', round(fitness.max() / ProbeConc * 100, 3), "%"
+            print('Target =', str(TargetCell), '/ Iter =', iter)
+            print("End Time =", time.time() - start_time, 'Fitness =', round(fitness.max() / ProbeConc * 100, 3), "%")
             for t in range(np.shape(Targets)[0]):
                 Seq1, Seq2 = translate2(theprobe[0], Targets[t, :])
                 rna_seqs = [Seq1[0], Seq2[0]]

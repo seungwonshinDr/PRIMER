@@ -1,0 +1,14 @@
+# Python dependencies for the pip-installable parts of PRIMER / DIPS.
+#
+# Legacy pipeline (Keq, cpt_NUPACK, crossover, pointmut, shiftmut, roulette,
+# elite) needs numpy + scipy. The modernized `primer2` package additionally
+# uses pandas (data loading) and pytest (tests).
+#
+# NOTE: the proprietary `nupack` package (https://docs.nupack.org) is NOT on
+# PyPI. Both the legacy Gibbs_*_NUPACK.py and primer2's NupackBackend need it
+# for real thermodynamics; install it separately under its own license. primer2
+# falls back to a NUPACK-free heuristic backend when it is absent.
+numpy
+scipy
+pandas
+pytest
